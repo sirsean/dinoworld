@@ -33,6 +33,9 @@ module.exports = new Store({
         }
     },
     handlers: {
+        "URL_CHANGE": function() {
+            readURL();
+        },
         "SET_PAGE": function(action) {
             page = action.page;
             setURL();

@@ -7,6 +7,11 @@ module.exports = {
             page: page
         });
     },
+    urlChange: function() {
+        Dispatcher.dispatch({
+            type: "URL_CHANGE"
+        });
+    },
     purchaseDino: function(name) {
         Dispatcher.dispatch({
             type: "PURCHASE_DINO",
