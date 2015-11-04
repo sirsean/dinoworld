@@ -1,0 +1,81 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+button {
+    padding: 8px;
+    font-size: 10pt;
+}
+
+input[type=checkbox] {
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    padding: 10px;
+}
+
+.bg-pink {
+    background-color: rgb(230, 146, 151);
+}
+
+.bg-red {
+    background-color: rgb(214, 20, 13);
+}
+
+.bg-light-green {
+    background-color: rgb(188, 253, 168);
+}
+
+.bg-green {
+    background-color: rgb(18, 129, 0);
+}
+
+.bg-light-yellow {
+    background-color: rgb(253, 243, 151);
+}
+
+.bg-yellow {
+    background-color: rgb(241, 166, 0);
+}
+
+.bg-light-blue {
+    background-color: rgb(87, 236, 252);
+}
+
+.bg-blue {
+    background-color: rgb(0, 86, 191);
+}
+
+.bg-light-grey {
+    background-color: rgb(113, 104, 112);
+}
+
+.grid-row {
+    padding: 4px;
+}
+
+.dino {
+    padding: 8px;
+    margin: 4px;
+}
+
+.moves-bar {
+    padding: 10px;
+    height: 120px;
+}
+
+.game-over {
+    padding: 10px;
+    height: 120px;
+}
+
+.disabled {
+    background-color: gray;
+}
