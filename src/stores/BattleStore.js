@@ -180,8 +180,14 @@ function checkWinner() {
     }
 }
 
+function numAlive(dinos) {
+    return dinos.reduce(function(numAlive, dino) {
+        return numAlive + (dino.isDead() ? 0 : 1);
+    }, 0);
+}
+
 function calculateWinnings() {
-    return Util.averageRevenue(opponentDinos) * 0.85;
+    return Util.averageRevenue(opponentDinos) * 0.85 * numAlive(playerDinos);
 }
 
 module.exports = new Store({
