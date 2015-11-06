@@ -1,6 +1,6 @@
 module.exports = React.createClass({
     onClick: function() {
-        if (this.props.onClick) {
+        if (!this.props.disabled && this.props.onClick) {
             this.props.onClick();
         }
     },
