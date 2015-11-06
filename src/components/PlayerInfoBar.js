@@ -27,10 +27,10 @@ module.exports = React.createClass({
             <div className="row">
                 <div className="col-sm-8 col-xs-2"></div>
                 <div className="col-sm-2 col-xs-6 end-xs">
-                    Current: <Number num={this.state.money} to={2} />
+                    Current: <Number num={this.state.money} />
                 </div>
                 <div className="col-sm-2 col-xs-4 end-xs">
-                    +<Number num={this.state.revenue} to={2} />/hour
+                    +<Number num={this.state.revenue} />/hour
                 </div>
             </div>
         );

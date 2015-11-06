@@ -3,6 +3,7 @@ var PlayerInfoBar = require("./PlayerInfoBar.js");
 var Number = require("./Number.js");
 var BattleStore = require("../stores/BattleStore.js");
 var Util = require("../util/Util.js");
+var Button = require("./Button.js");
 
 var Dino = React.createClass({
     onSwitchClick: function() {
@@ -18,25 +19,26 @@ var Dino = React.createClass({
         }
         return (
             <div className={className}>
-                <div className="col-xs-2 center-xs">
-                    {dino.level}
+                <div className="logo-level col-sm-4 col-xs-2 center-xs">
+                    <img className="logo" src="/img/dino.png" />
+                    <span className="level">{dino.level}</span>
                 </div>
-                <div className="col-xs-8">
+                <div className="col-sm-6 col-xs-8">
                     <div className="row">
-                        <div className="col-xs-12">{dino.name}</div>
+                        <div className="col-xs-12"><strong>{dino.name}</strong></div>
                     </div>
                     <div className="row">
                         <div className="col-xs-4">Health</div>
-                        <div className="col-xs-8 end-xs"><Number num={dino.currentHealth} to={2} /></div>
+                        <div className="col-xs-8 end-xs"><Number num={dino.currentHealth} /></div>
                     </div>
                     <div className="row">
                         <div className="col-xs-4">Attack</div>
-                        <div className="col-xs-8 end-xs"><Number num={dino.attack(this.props.target)} to={2} /></div>
+                        <div className="col-xs-8 end-xs"><Number num={dino.attack(this.props.target)} /></div>
                     </div>
                 </div>
                 <div className="col-xs-2">
                     {(this.props.index != 0) && (dino.currentHealth > 0) && (this.props.movesTaken == 0) &&
-                        <button onClick={this.onSwitchClick}>Switch</button>}
+                        <Button onClick={this.onSwitchClick}>Switch</Button>}
                 </div>
             </div>
         );
@@ -73,30 +75,31 @@ var MovesBar = React.createClass({
                         Moves: {this.props.currentMoves} / {this.props.maxMoves}
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-xs-4 center-xs bg-yellow">
-                        <button onClick={this.onSaveClick}>Save</button>
+                <div className="row middle-xs">
+                    <div className="col-xs-4 center-xs">
+                        <Button css="bg-yellow bigger" onClick={this.onSaveClick}>
+                            <div>Save</div>
+                            <div>{this.props.saves}</div>
+                        </Button>
                     </div>
-                    <div className="col-xs-4 center-xs bg-blue">
-                        <button onClick={this.onDefendClick}>Defend</button>
+                    <div className="col-xs-4 center-xs">
+                        <Button css="bg-blue bigger" onClick={this.onDefendClick}>
+                            <div>Defend</div>
+                            <div>{this.props.defends}</div>
+                        </Button>
                     </div>
-                    <div className="col-xs-4 center-xs bg-red">
-                        <button onClick={this.onAttackClick}>Attack</button>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-xs-4 center-xs bg-yellow">
-                        {this.props.saves}
-                    </div>
-                    <div className="col-xs-4 center-xs bg-blue">
-                        {this.props.defends}
-                    </div>
-                    <div className="col-xs-4 center-xs bg-red">
-                        {this.props.attacks}
-                        <br />
-                        <Number num={this.props.currentDamage} to={2} />
-                        -&gt;
-                        <Number num={this.props.nextDamage} to={2} />
+                    <div className="col-xs-4 center-xs">
+                        <Button css="bg-red bigger" onClick={this.onAttackClick}>
+                            <div>Attack</div>
+                            <div>
+                                {this.props.attacks}
+                            </div>
+                            <div>
+                                <Number num={this.props.currentDamage} />
+                                -&gt;
+                                <Number num={this.props.nextDamage} />
+                            </div>
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -110,7 +113,7 @@ var Log = React.createClass({
         var line;
         if (log.action == "ATTACK") {
             if (log.attacks > log.defends) {
-                line = (<span>{log.attacker} attacked with {log.attacks}, {log.defender} defended with {log.defends}. <Number num={log.totalDamage} to={2} /> damage done!</span>);
+                line = (<span>{log.attacker} attacked with {log.attacks}, {log.defender} defended with {log.defends}. <Number num={log.totalDamage} /> damage done!</span>);
             } else {
                 line = (<span>{log.attacker} attacked with {log.attacks}, {log.defender} defended with {log.defends}. BLOCKED!</span>);
             }
@@ -123,9 +126,9 @@ var Log = React.createClass({
         }
         var className = "row ";
         if (log.player) {
-            className += "bg-green";
+            className += "log-player";
         } else {
-            className += "bg-red";
+            className += "log-opponent";
         }
         return (
             <div className={className}>
@@ -219,10 +222,10 @@ module.exports = React.createClass({
                                 Victory!
                             </p>
                             <p>
-                                You win <Number num={this.state.winnings} to={2} />
+                                You win <Number num={this.state.winnings} />
                             </p>
                             <p>
-                                <button onClick={this.onCollectClick}>Collect</button>
+                                <Button onClick={this.onCollectClick}>Collect</Button>
                             </p>
                         </div>
                     </div>
@@ -234,7 +237,7 @@ module.exports = React.createClass({
                                 Defeat!
                             </p>
                             <p>
-                                <button onClick={this.onLeaveClick}>Leave</button>
+                                <Button onClick={this.onLeaveClick}>Leave</Button>
                             </p>
                         </div>
                     </div>

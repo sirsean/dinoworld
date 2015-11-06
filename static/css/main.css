@@ -8,9 +8,22 @@ body {
     user-select: none;
 }
 
-button {
+.button {
     padding: 8px;
     font-size: 10pt;
+    border: 1px solid black;
+    background-color: #DDDDDD;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+.button.disabled {
+    background-color: #333333;
+}
+
+.button.bigger {
+    padding: 20px;
 }
 
 input[type=checkbox] {
@@ -66,16 +79,43 @@ input[type=checkbox] {
     margin: 4px;
 }
 
+.dino .logo-level .logo {
+    width: 100%;
+    height: auto;
+}
+
+.dino .logo-level .level {
+    font-weight: bold;
+}
+
 .moves-bar {
     padding: 10px;
-    height: 120px;
+    height: 160px;
 }
 
 .game-over {
     padding: 10px;
-    height: 120px;
+    height: 160px;
 }
 
 .disabled {
     background-color: gray;
+}
+
+.log-player {
+    background-color: #EEEEEE;
+}
+
+.log-opponent {
+    background-color: #888888;
+}
+
+.dino-grid-cell {
+    border: 4px solid white;
+    padding: 6px;
+}
+
+img.grid-img {
+    height: 200px;
+    width: auto;
 }

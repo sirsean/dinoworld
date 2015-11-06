@@ -106,7 +106,7 @@ function endTurn() {
         });
     } else if (lastDefends > 0) {
         logs.unshift({
-            player: isPlayerTurn,
+            player: !isPlayerTurn,
             action: "BLOCK",
             defender: defender.name,
             defends: lastDefends

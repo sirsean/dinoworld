@@ -4,6 +4,7 @@ var PlayerInfoBar = require("./PlayerInfoBar.js");
 var PlayerStore = require("../stores/PlayerStore.js");
 var Number = require("./Number.js");
 var Util = require("../util/Util.js");
+var Button = require("./Button.js");
 
 var DinoRow = React.createClass({
     onPurchaseClick: function() {
@@ -12,19 +13,49 @@ var DinoRow = React.createClass({
     },
     render: function() {
         var dino = this.props.dino;
-        var className = "grid-row row middle-xs " + Util.dinoTypeColors[dino.type];
+        var className = "dino-grid-cell col-sm-3 col-xs-12 middle-xs " + Util.dinoTypeColors[dino.type];
         if (!this.props.enabled) {
             className += " disabled";
         }
         return (
             <div className={className}>
-                <div className="col-sm-6 col-xs-6">{dino.name}</div>
-                <div className="col-sm-1 col-xs-3 end-xs"><Number num={dino.health} /></div>
-                <div className="col-sm-1 col-xs-3 end-xs"><Number num={dino.attack} /></div>
-                <div className="col-sm-1 col-xs-3 end-xs"><Number num={dino.revenue} /></div>
-                <div className="col-sm-1 col-xs-3 end-xs"><Number num={dino.cost} /></div>
-                <div className="col-sm-2 col-xs-6 end-xs">
-                    <button disabled={!this.props.enabled || this.props.money < dino.cost} onClick={this.onPurchaseClick}>Buy</button>
+                <div className="row middle-xs">
+                    <div className="col-xs-12 center-xs">
+                        <strong>{dino.name}</strong>
+                    </div>
+                </div>
+                <div className="row middle-xs center-xs">
+                    <div className="col-xs-12">
+                        <img className="grid-img" src="/img/dino.png" />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-8">
+                        <div className="row">
+                            <div className="col-xs-6">Attack</div>
+                            <div className="col-xs-6"><Number num={dino.attack} /></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-xs-6">Health</div>
+                            <div className="col-xs-6"><Number num={dino.health} /></div>
+                        </div>
+                        <div className="row">
+                            <div className="col-xs-6">Revenue</div>
+                            <div className="col-xs-6"><Number num={dino.revenue} /></div>
+                        </div>
+                    </div>
+                    <div className="col-xs-4">
+                        <div className="row center-xs">
+                            <div className="col-xs-12">
+                                <Button disabled={!this.props.enabled || this.props.money < dino.cost} onClick={this.onPurchaseClick}>
+                                    <div>Buy</div>
+                                    <div>
+                                        <Number num={dino.cost} />
+                                    </div>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -62,22 +93,20 @@ module.exports = React.createClass({
         return (
             <div>
                 <PlayerInfoBar />
-                <h1>Dino Shop</h1>
-                <div>
-                    <button onClick={this.onHomeClick}>Home</button>
-                </div>
                 <div className="row middle-xs">
-                    <div className="col-sm-6 col-xs-6">Name</div>
-                    <div className="col-sm-1 col-xs-3 end-xs">Health</div>
-                    <div className="col-sm-1 col-xs-3 end-xs">Attack</div>
-                    <div className="col-sm-1 col-xs-3 end-xs">Revenue</div>
-                    <div className="col-sm-1 col-xs-3 end-xs">Cost</div>
-                    <div className="col-sm-2 col-xs-6 end-xs"></div>
+                    <div className="col-xs-3">
+                        <Button css="bigger" onClick={this.onHomeClick}>Home</Button>
+                    </div>
+                    <div className="col-xs-6 center-xs">
+                        <h1>Dino Shop</h1>
+                    </div>
                 </div>
-                {dinos.map(function(dino, i) {
-                    var enabled = (i < this.state.maxIndex + 10);
-                    return <DinoRow key={dino.name} dino={dino} money={this.state.money} enabled={enabled} />
-                }.bind(this))}
+                <div className="row">
+                    {dinos.map(function(dino, i) {
+                        var enabled = (i < this.state.maxIndex + 10);
+                        return <DinoRow key={dino.name} dino={dino} money={this.state.money} enabled={enabled} />
+                    }.bind(this))}
+                </div>
             </div>
         );
     }
