@@ -253,6 +253,7 @@ module.exports = new Store({
             saves = 0;
             defends = 0;
             attacks = 0;
+            switches = 0;
             lastDefends = 0;
             playerSaves = 0;
             opponentSaves = 0;
