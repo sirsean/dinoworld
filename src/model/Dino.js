@@ -54,6 +54,10 @@ Dino.prototype.revenue = function() {
     return this.info().revenue;
 };
 
+Dino.prototype.imgUrl = function() {
+    return this.info().imgUrl;
+};
+
 Dino.prototype.info = function() {
     return DinoDB.values(this.name, this.level);
 };

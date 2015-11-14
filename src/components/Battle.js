@@ -20,7 +20,7 @@ var Dino = React.createClass({
         return (
             <div className={className}>
                 <div className="logo-level col-sm-4 col-xs-2 center-xs">
-                    <img className="logo" src="/img/dino.png" />
+                    <img className="logo" src={dino.imgUrl()} />
                     <span className="level">{dino.level}</span>
                 </div>
                 <div className="col-sm-6 col-xs-8">

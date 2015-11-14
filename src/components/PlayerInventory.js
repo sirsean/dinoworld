@@ -32,7 +32,7 @@ var DinoRow = React.createClass({
                 </div>
                 <div className="row middle-xs center-xs">
                     <div className="col-xs-12">
-                        <img className="grid-img" src="/img/dino.png" />
+                        <img className="grid-img" src={dino.imgUrl()} />
                     </div>
                 </div>
                 <div className="row center-xs">
