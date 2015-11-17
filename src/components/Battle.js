@@ -37,7 +37,7 @@ var Dino = React.createClass({
                     </div>
                 </div>
                 <div className="col-xs-2">
-                    {(this.props.index != 0) && (dino.currentHealth > 0) && (this.props.movesTaken == 0) &&
+                    {(this.props.index != 0) && (dino.currentHealth > 0) && (this.props.movesTaken == 0) && this.props.isPlayerTurn &&
                         <Button onClick={this.onSwitchClick}>Switch</Button>}
                 </div>
             </div>
@@ -50,7 +50,7 @@ var DinoList = React.createClass({
         return (
             <div>
                 {this.props.dinos.map(function(dino, i) {
-                    return <Dino key={dino.id} index={i} dino={dino} target={this.props.target} movesTaken={this.props.movesTaken} />;
+                    return <Dino key={dino.id} index={i} dino={dino} target={this.props.target} movesTaken={this.props.movesTaken} isPlayerTurn={this.props.isPlayerTurn} />;
                 }.bind(this))}
             </div>
         );
@@ -75,33 +75,35 @@ var MovesBar = React.createClass({
                         Moves: {this.props.currentMoves} / {this.props.maxMoves}
                     </div>
                 </div>
-                <div className="row middle-xs">
-                    <div className="col-xs-4 center-xs">
-                        <Button css="bg-yellow bigger" onClick={this.onSaveClick}>
-                            <div>Save</div>
-                            <div>{this.props.saves}</div>
-                        </Button>
+                {this.props.isPlayerTurn &&
+                    <div className="row middle-xs">
+                        <div className="col-xs-4 center-xs">
+                            <Button css="bg-yellow bigger" onClick={this.onSaveClick}>
+                                <div>Save</div>
+                                <div>{this.props.saves}</div>
+                            </Button>
+                        </div>
+                        <div className="col-xs-4 center-xs">
+                            <Button css="bg-blue bigger" onClick={this.onDefendClick}>
+                                <div>Defend</div>
+                                <div>{this.props.defends}</div>
+                            </Button>
+                        </div>
+                        <div className="col-xs-4 center-xs">
+                            <Button css="bg-red bigger" onClick={this.onAttackClick}>
+                                <div>Attack</div>
+                                <div>
+                                    {this.props.attacks}
+                                </div>
+                                <div>
+                                    <Number num={this.props.currentDamage} />
+                                    -&gt;
+                                    <Number num={this.props.nextDamage} />
+                                </div>
+                            </Button>
+                        </div>
                     </div>
-                    <div className="col-xs-4 center-xs">
-                        <Button css="bg-blue bigger" onClick={this.onDefendClick}>
-                            <div>Defend</div>
-                            <div>{this.props.defends}</div>
-                        </Button>
-                    </div>
-                    <div className="col-xs-4 center-xs">
-                        <Button css="bg-red bigger" onClick={this.onAttackClick}>
-                            <div>Attack</div>
-                            <div>
-                                {this.props.attacks}
-                            </div>
-                            <div>
-                                <Number num={this.props.currentDamage} />
-                                -&gt;
-                                <Number num={this.props.nextDamage} />
-                            </div>
-                        </Button>
-                    </div>
-                </div>
+                }
             </div>
         );
     }
@@ -177,10 +179,6 @@ module.exports = React.createClass({
             this.setState(this.getInitialState());
         }
     },
-    onCollectClick: function() {
-        Actions.collectWinnings(this.state.winnings);
-        Actions.setPage("home");
-    },
     onLeaveClick: function() {
         Actions.setPage("home");
     },
@@ -192,16 +190,29 @@ module.exports = React.createClass({
 
                 <div className="row">
                     <div className="col-sm-4 col-xs-6">
-                        <DinoList dinos={this.state.playerDinos} target={this.state.currentOpponentDino} movesTaken={this.state.movesTaken} />
+                        <DinoList dinos={this.state.playerDinos} target={this.state.currentOpponentDino} movesTaken={this.state.movesTaken} isPlayerTurn={this.state.isPlayerTurn} />
                     </div>
                     <div className="col-sm-4 col-sm-offset-4 col-xs-6">
-                        <DinoList dinos={this.state.opponentDinos} target={this.state.currentPlayerDino} />
+                        <DinoList dinos={this.state.opponentDinos} target={this.state.currentPlayerDino} isPlayerTurn={this.state.isPlayerTurn} />
                     </div>
                 </div>
                 {(this.state.winner == null) &&
                     <div className="moves-bar row">
                         <div className="col-sm-6 col-xs-12">
                             {this.state.isPlayerTurn &&
+                                <MovesBar
+                                    isPlayerTurn={this.state.isPlayerTurn}
+                                    maxMoves={this.state.maxMoves}
+                                    currentMoves={this.state.currentMoves}
+                                    saves={this.state.saves}
+                                    defends={this.state.defends}
+                                    attacks={this.state.attacks}
+                                    currentDamage={this.state.currentDamage}
+                                    nextDamage={this.state.nextDamage}
+                                    />}
+                        </div>
+                        <div className="col-sm-6 col-xs-12">
+                            {!this.state.isPlayerTurn &&
                                 <MovesBar
                                     isPlayerTurn={this.state.isPlayerTurn}
                                     maxMoves={this.state.maxMoves}
@@ -225,7 +236,7 @@ module.exports = React.createClass({
                                 You win <Number num={this.state.winnings} />
                             </p>
                             <p>
-                                <Button onClick={this.onCollectClick}>Collect</Button>
+                                <Button onClick={this.onLeaveClick}>Leave</Button>
                             </p>
                         </div>
                     </div>

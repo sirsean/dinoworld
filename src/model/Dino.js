@@ -76,6 +76,9 @@ Dino.prototype.feed = function() {
     if (this.feedings >= 5) {
         this.level++;
         this.feedings = 0;
+        return true;
+    } else {
+        return false;
     }
 };
 

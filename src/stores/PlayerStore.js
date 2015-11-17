@@ -98,7 +98,10 @@ module.exports = new Store({
         },
         "FEED": function(action) {
             money -= action.dino.feedPrice();
-            action.dino.feed();
+            var levelUp = action.dino.feed();
+            if (levelUp) {
+                Actions.leveledUp(action.dino);
+            }
             write();
         },
         "TOGGLE_CHECKED_DINO": function(action) {
@@ -126,6 +129,7 @@ module.exports = new Store({
         "COLLECT_WINNINGS": function(action) {
             if (Math.random() < 0.3) {
                 checkedDinos.forEach(function(dino) {
+                    Actions.winFeed(dino);
                     dino.feed();
                 });
             }

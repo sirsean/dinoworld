@@ -70,6 +70,19 @@ input[type=checkbox] {
     background-color: rgb(113, 104, 112);
 }
 
+.messages {
+    position: fixed;
+    z-index: 100;
+    top: 20px;
+    left: 20vw;
+}
+
+.messages .message {
+    background-color: #AAAAAA;
+    padding: 16px;
+    margin: 8px;
+}
+
 .grid-row {
     padding: 4px;
 }

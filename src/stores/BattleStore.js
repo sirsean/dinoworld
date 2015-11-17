@@ -153,7 +153,7 @@ function endTurn() {
             opponentAi.generateMoves(currentMoves()).forEach(function(move) {
                 move();
             });
-        }, 400);
+        }, 3000);
     }
 }
 
@@ -168,6 +168,7 @@ function checkWinner() {
     if (playerWins) {
         winner = "player";
         winnings = calculateWinnings();
+        Actions.collectWinnings(winnings);
         return true;
     } else if (opponentWins) {
         winner = "opponent";

@@ -1,6 +1,12 @@
 var Dispatcher = require("../dispatcher/Dispatcher.js");
 
 module.exports = {
+    removeMessage: function(messageId) {
+        Dispatcher.dispatch({
+            type: "REMOVE_MESSAGE",
+            messageId: messageId
+        });
+    },
     setPage: function(page) {
         Dispatcher.dispatch({
             type: "SET_PAGE",
@@ -71,6 +77,18 @@ module.exports = {
         Dispatcher.dispatch({
             type: "COLLECT_WINNINGS",
             winnings: winnings
+        });
+    },
+    leveledUp: function(dino) {
+        Dispatcher.dispatch({
+            type: "LEVELED_UP",
+            dino: dino
+        });
+    },
+    winFeed: function(dino) {
+        Dispatcher.dispatch({
+            type: "WIN_FEED",
+            dino: dino
         });
     }
 };

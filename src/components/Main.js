@@ -4,6 +4,7 @@ var PlayerInfoBar = require("./PlayerInfoBar.js");
 var DinoShop = require("./DinoShop.js");
 var PlayerInventory = require("./PlayerInventory.js");
 var Battle = require("./Battle.js");
+var Messages = require("./Messages.js");
 
 module.exports = React.createClass({
     getInitialState: function() {
@@ -45,6 +46,7 @@ module.exports = React.createClass({
         }
         return (
             <div>
+                <Messages />
                 {content}
             </div>
         );
